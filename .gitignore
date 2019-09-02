@@ -1,0 +1,10 @@
+*.classpath
+*.project
+.settings/
+sleuth-sample-downstream-service/.mvn/
+sleuth-sample-downstream-service/logs/
+sleuth-sample-upstream-service1/.mvn/
+sleuth-sample-upstream-service1/logs/
+sleuth-sample-upstream-service2/.mvn/
+sleuth-sample-upstream-service2/logs/
+environment/elk-stack/logs/

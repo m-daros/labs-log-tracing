@@ -25,8 +25,16 @@ services:
         max_attempts: 3
         window: 120s
     
+#    volumes:
+#      - ./elasticsearch:/usr/share/elasticsearch/data:rw
+ 
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200/_cluster/health | grep -vq '\"status\":\"red\"'"]
+      retries: 10
+      interval: 20s
+ 
     volumes:
-      - ./elasticsearch:/usr/share/elasticsearch/data:rw
+      - esdata:/usr/share/elasticsearch/data 
     
     ports:
       - 9200:9200
@@ -35,7 +43,7 @@ services:
 #----------------------------------------------------------------------------------------------
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:7.3.1
+    image: docker.elastic.co/kibana/kibana:7.3.1
     container_name: kibana
     
     volumes:
@@ -62,6 +70,11 @@ services:
         max_attempts: 3
         window: 120s
 
+    healthcheck:
+      test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://kibana:5601/"]
+      retries: 10
+      interval: 10s
+    
     depends_on:
       - elasticsearch
       
@@ -129,7 +142,7 @@ services:
       - -XX:+UseG1GC
         
     command: logstash -f /usr/share/logstash/config/dynservices-logs-pipeline.conf
-        
+           
     depends_on:
       - elasticsearch
 
@@ -146,12 +159,18 @@ services:
         
       - ELASTICSEARCH_HOST=elasticsearch:9200
         
-    command: apm-server
+    command: apm-server -e
+        
+    healthcheck:
+      test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://apm-server:8200/healthcheck"]
+      retries: 10
+      interval: 10s
         
     depends_on:
       - elasticsearch
       
 #----------------------------------------------------------------------------------------------
 
-#volumes:
-#  esdata1:
+volumes:
+  esdata:
+    driver: local

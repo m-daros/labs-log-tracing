@@ -34,7 +34,11 @@ services:
       interval: 20s
  
     volumes:
-      - esdata:/usr/share/elasticsearch/data 
+    
+# PROVA MAX
+#      - esdata:/usr/share/elasticsearch/data 
+      - ./elasticsearch:/usr/share/elasticsearch/data:rw
+      
     
     ports:
       - 9200:9200
@@ -171,6 +175,7 @@ services:
       
 #----------------------------------------------------------------------------------------------
 
-volumes:
-  esdata:
-    driver: local
+# PROVA MAX
+#volumes:
+#  esdata:
+#    driver: local

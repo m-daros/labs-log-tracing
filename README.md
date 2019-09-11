@@ -42,7 +42,7 @@ The application is described in the following picture:
 
 
 
-![](/Users/mdaros/Documents/labs-log-tracing.png)
+![](docs/images/labs-log-tracing.png)
 
 
 
@@ -66,4 +66,4 @@ APM data dan be visualized in Kibana using dedicated APM dashboards.
 
 
 
-![](/Users/mdaros/Documents/Elastic Stack with APM.png)
+![](docs/images/elastic-stack-with-apm.png)

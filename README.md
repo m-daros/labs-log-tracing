@@ -1,6 +1,6 @@
 # labs-log-tracing
 
-The aims of this lab is to reason about complexity related to decomposition of  an application in small microservices having each one multiple instances, its own log files an every one interacting to one or more service in order to offer a functionality.
+The aims of this lab is to reason about complexity related to decomposition of  an application in small microservices having each one multiple instances, its own log files an every one interacting to one or more service in order to offer a broader functionality.
 
 We address two concerns:
 
@@ -52,9 +52,11 @@ http://elastic.co as described in the following image
 
 
 
+![](docs/images/elastic-stack-with-apm.png)
+
 Related to logs aggregation perspective:
 
-Logs are collected by Beats (FIlebeat in our case) on every microservice machine or container, elaborated by Logstash (Extract Transform Load), ingested into Elasticsearch and then managed on Kibana in order to search the needed informations collected into logs.
+Logs are collected by Beats (FIlebeat in our case) on every microservice machine or container, elaborated by Logstash (Extract Transform Load), ingested into Elasticsearch and then managed and visualized on Kibana in order to search the needed informations collected into logs.
 
 
 
@@ -66,4 +68,84 @@ APM data dan be visualized in Kibana using dedicated APM dashboards.
 
 
 
-![](docs/images/elastic-stack-with-apm.png)
+### Prerequisites
+
+- Java 8
+- Docker
+- Docker Compose
+
+
+
+### How to  start the Elastic stack
+
+The Elastic stack is provided as a set of Docker containers and managed as Docker Compose file **environment/elk-stack/docker-compose.yml**
+
+In order to start the Elastic search, please open a shell window and type the following commands
+
+`cd $PROJECT_HOME/environment/elk-stack`
+
+`docker-compose up`
+
+
+
+Docker Compose will start a set of Docker containers for the following components
+
+**Elasticsearch** on ports 9200, 9300
+
+**Kibana** on port 5601
+
+**Logstash** on ports 5400, 9600
+
+
+
+**Filebeat**
+
+Filebeat is configured to scan log files on your laptop on folder $PROJECT_HOME/environments/logs/*/\*.log
+
+This scan log files with .log extension on every subfolder on $PROJECT_HOME/environments/logs
+
+
+
+**APM Server** on port 8200
+
+
+
+### How to start microservices
+
+The application is a Maven project composed by  the following maven modules
+
+- **downstream-service**
+- **upstream-service1**
+- **upstream-service2**
+
+every one is a **Spring Boot** microservice
+
+
+
+In order to start the microservices, open 3 different shell windows and type the following commands
+
+**TODO Rename microservices folders on project structure** !!
+
+
+
+On first shell window
+
+`cd $PROJECT_HOME/downstream-service``
+
+`./start-service.sh`
+
+
+
+On second shell window
+
+`cd $PROJECT_HOME/upstream-service1`
+
+`./start-service.sh`
+
+
+
+On third shell window
+
+`cd $PROJECT_HOME/upstream-service2`
+
+`./start-service.sh`

@@ -21,6 +21,17 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
+		
+		<!-- Collecting metrics to Elasticsearch -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-elastic</artifactId>
+		</dependency>		
+		
 <!-- 		<dependency> -->
 <!-- 			<groupId>org.springframework.cloud</groupId> -->
 <!-- 			<artifactId>spring-cloud-starter-zipkin</artifactId> -->
@@ -36,11 +47,80 @@
 
 	<build>
 		<plugins>
+		
+			<!-- Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<plugin>
+    			<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-antrun-plugin</artifactId>
+			    <version>1.8</version>
+    			<executions>
+		        	<execution>
+		            	<phase>test</phase>
+		            	<goals>
+		                	<goal>run</goal>
+		            	</goals>
+		            	<configuration>
+		                	<tasks>
+		                    	<echo>Using env.test.properties</echo>
+		                    	<copy file="../environment/elk-stack/elastic-apm-agent-1.9.0.jar" tofile="${basedir}/target/elastic-apm-agent-1.9.0.jar"/>
+		                    </tasks>
+		                </configuration>
+		            </execution>
+		        </executions>
+		    </plugin>
+	
+			<!-- Docker -->
+			<!-- 
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<images>
+						<image>
+							<name>fabric8:dmp-sample-dockerfile</name>
+							<alias>dockerfile</alias>
+							<version>0.31.0</version>
+							<build>
+								<contextDir>${project.basedir}/src/main/docker</contextDir>
+								<assembly>
+									<descriptorRef>rootWar</descriptorRef>
+								</assembly>
+							</build>
+							<run>
+								<ports>
+									<port>10090:10090</port>
+								</ports>
+							</run>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
+			-->
+	
 		</plugins>
 	</build>
+	
+	<profiles>
+		<profile>
+			<id>docker</id>
+			<properties>
+
+				<!-- Activate docker profile on Spring Boot -->
+				<spring.profiles.active>docker</spring.profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			
+			<!--  Specific dependencies for profile onprem -->
+			<dependencies>
+			</dependencies>			
+		</profile>
+	</profiles>	
 
 </project>

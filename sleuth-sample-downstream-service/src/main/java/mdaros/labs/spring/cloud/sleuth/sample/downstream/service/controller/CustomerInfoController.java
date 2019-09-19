@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,12 @@ public class CustomerInfoController {
 
 	private static final Logger logger = LoggerFactory.getLogger ( CustomerInfoController.class );
 
+	@Value ( "${customers.service.url}" )
+	private String customersServiceURL;
+	
+	@Value ( "${addresses.service.url}" )
+	private String addressesServiceURL;
+	
 	
 	@Autowired
 	private RestTemplate restTemplate;
@@ -34,7 +41,7 @@ public class CustomerInfoController {
 		
 		logger.info ( "GET /customers-info/{}", id );
 		
-		ResponseEntity<Customer> customerResponse = restTemplate.exchange ( "http://localhost:8080/customers/" + id, HttpMethod.GET, null, new ParameterizedTypeReference<Customer> () {} );
+		ResponseEntity<Customer> customerResponse = restTemplate.exchange ( customersServiceURL + id, HttpMethod.GET, null, new ParameterizedTypeReference<Customer> () {} );
 
 		Customer customer;
 		
@@ -49,7 +56,7 @@ public class CustomerInfoController {
 			return Optional.empty ();
 		}
 		
-		ResponseEntity<List<Address>> addressesResponse = restTemplate.exchange ( "http://localhost:9090/addresses/customer/" + id, HttpMethod.GET, null, new ParameterizedTypeReference<List<Address>> () {} );
+		ResponseEntity<List<Address>> addressesResponse = restTemplate.exchange ( addressesServiceURL + id, HttpMethod.GET, null, new ParameterizedTypeReference<List<Address>> () {} );
 		
 		List<Address> addresses = addressesResponse.getBody ();
 		

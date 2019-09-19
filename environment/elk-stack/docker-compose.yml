@@ -2,6 +2,7 @@ version: '3.3'
 
 services:
 
+
 #----------------------------------------------------------------------------------------------
 
   elasticsearch:
@@ -120,7 +121,7 @@ services:
     depends_on:
       - logstash
       - elasticsearch
-      
+            
 #----------------------------------------------------------------------------------------------
 
   logstash:
@@ -149,7 +150,7 @@ services:
            
     depends_on:
       - elasticsearch
-
+      
 #----------------------------------------------------------------------------------------------
 
   apm-server:
@@ -172,10 +173,31 @@ services:
         
     depends_on:
       - elasticsearch
-      
+           
+
 #----------------------------------------------------------------------------------------------
 
-# PROVA MAX
-#volumes:
-#  esdata:
-#    driver: local
+  sleuth-sample-downstream-service:
+        container_name: sleuth-sample-downstream-service
+        ports:
+            - '10090:10090'
+        image: mdaros/sleuth-sample-downstream-service
+
+
+#----------------------------------------------------------------------------------------------
+
+  sleuth-sample-upstream-service1:
+        container_name: sleuth-sample-upstream-service1
+        ports:
+            - '8080:8080'
+        image: mdaros/sleuth-sample-upstream-service1
+
+#----------------------------------------------------------------------------------------------
+
+  sleuth-sample-upstream-service2:
+        container_name: sleuth-sample-upstream-service2
+        ports:
+            - '9090:9090'
+        image: mdaros/sleuth-sample-upstream-service2
+
+#----------------------------------------------------------------------------------------------

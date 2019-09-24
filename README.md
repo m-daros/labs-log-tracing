@@ -56,17 +56,19 @@ http://elastic.co as described in the following image
 
 Related to logs aggregation perspective:
 
-Logs are collected by Beats (FIlebeat in our case) on every microservice machine or container, elaborated by Logstash (Extract Transform Load), ingested into Elasticsearch and then managed and visualized on Kibana in order to search the needed informations collected into logs.
+Logs are collected by **Beats** (**FIlebeat** in our case) on every microservice machine or container, elaborated by **Logstash** (Extract Transform Load), ingested into **Elasticsearch** and then managed and visualized on **Kibana** in order to search the needed informations collected into logs.
 
 
 
 Related to distributed tracing:
 
-The Elastic APM stack can get trace info on every microservice machine or container using APM agents and collect them in Elasticsearch through an APM server.
+The **Elastic APM stack** can get trace info on every microservice machine or container using **APM agents** and collect them in **Elasticsearch** through an **APM server**.
 
-APM data dan be visualized in Kibana using dedicated APM dashboards.
+APM data dan be visualized in **Kibana** using dedicated APM dashboards like the following one that describe the trace of API calls exposed as REST endpoint ttp://localhost:10090/customers-info/{customer-id}](http://localhost:10090/customers-info/{customer-id}) and the interaction between the downstream service and the upstream (collaborators) services and related time consumptions.
 
 
+
+![](docs/images/sample-app-tracing.png)
 
 ### Prerequisites
 
@@ -76,15 +78,15 @@ APM data dan be visualized in Kibana using dedicated APM dashboards.
 
 
 
-### How to  start the Elastic stack
+### How to start the lab
 
-The Elastic stack is provided as a set of Docker containers and managed as Docker Compose file **environment/elk-stack/docker-compose.yml**
+Both the Elastic stack and the microservices are provided as a set of Docker containers and managed as Docker Compose file **environment/elk-stack/docker-compose.yml**
 
-In order to start the Elastic search, please open a shell window and type the following commands
+In order to start the lab, please open a shell window and type the following commands
 
 `cd $PROJECT_HOME/environment/elk-stack`
 
-`docker-compose up`
+`docker-compose up -d`
 
 
 
@@ -110,42 +112,9 @@ This scan log files with .log extension on every subfolder on $PROJECT_HOME/envi
 
 
 
-### How to start microservices
+**downstream-service** on port 10090
 
-The application is a Maven project composed by  the following maven modules
+**upstream-service1** on port 8080
 
-- **downstream-service**
-- **upstream-service1**
-- **upstream-service2**
+**upstream-service2** on port 9090
 
-every one is a **Spring Boot** microservice
-
-
-
-In order to start the microservices, open 3 different shell windows and type the following commands
-
-**TODO Rename microservices folders on project structure** !!
-
-
-
-On first shell window
-
-`cd $PROJECT_HOME/downstream-service``
-
-`./start-service.sh`
-
-
-
-On second shell window
-
-`cd $PROJECT_HOME/upstream-service1`
-
-`./start-service.sh`
-
-
-
-On third shell window
-
-`cd $PROJECT_HOME/upstream-service2`
-
-`./start-service.sh`

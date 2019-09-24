@@ -9,7 +9,7 @@ ENV LOG_PATH=/usr/share/logs/upstream-service1
 ENV LOG_FILE=sleuth-sample-upstream-service1.log
 ENV APM_AGENT_PATH=./elastic-apm-agent-1.9.0.jar
 
-VOLUME [../environment/logs/upstream-service1:/usr/share/logs/upstream-service1:rw]
+VOLUME [ "/usr/share/logs/upstream-service1" ]
 
 RUN sh -c 'touch sleuth-sample-upstream-service1-0.0.1-SNAPSHOT.jar'
 

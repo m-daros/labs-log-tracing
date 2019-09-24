@@ -55,6 +55,8 @@
 
 	<build>
 		<plugins>
+		
+			<!-- Spring Boot -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -85,6 +87,21 @@
 	
 	<profiles>
 		<profile>
+			<id>local</id>
+			<properties>
+
+				<!-- Activate docker profile on Spring Boot -->
+				<spring.profiles.active>default</spring.profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			
+			<!--  Specific dependencies for profile default -->
+			<dependencies>
+			</dependencies>			
+		</profile>	
+		<profile>
 			<id>docker</id>
 			<properties>
 
@@ -95,11 +112,25 @@
 				<activeByDefault>false</activeByDefault>
 			</activation>
 			
-			<!--  Specific dependencies for profile onprem -->
+			<!--  Specific dependencies for profile docker -->
 			<dependencies>
 			</dependencies>			
 		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+
+				<!-- Activate docker profile on Spring Boot -->
+				<spring.profiles.active>test</spring.profiles.active>
+			</properties>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			
+			<!--  Specific dependencies for profile test -->
+			<dependencies>
+			</dependencies>			
+		</profile>		
 	</profiles>	
-		
 
 </project>

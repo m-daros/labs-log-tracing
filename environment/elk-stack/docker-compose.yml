@@ -178,26 +178,44 @@ services:
 #----------------------------------------------------------------------------------------------
 
   sleuth-sample-downstream-service:
-        container_name: sleuth-sample-downstream-service
-        ports:
-            - '10090:10090'
-        image: mdaros/sleuth-sample-downstream-service
+     
+     container_name: sleuth-sample-downstream-service
+     
+     image: mdaros/sleuth-sample-downstream-service
+
+     ports:
+         - '10090:10090'        
+          
+     volumes:
+        - ./logs/downstream-service:/usr/share/logs/downstream-service:rw     
 
 
 #----------------------------------------------------------------------------------------------
 
   sleuth-sample-upstream-service1:
-        container_name: sleuth-sample-upstream-service1
-        ports:
-            - '8080:8080'
-        image: mdaros/sleuth-sample-upstream-service1
+     
+     container_name: sleuth-sample-upstream-service1
+     
+     image: mdaros/sleuth-sample-upstream-service1
+
+     ports:
+         - '8080:8080'        
+
+     volumes:
+        - ./logs/upstream-service1:/usr/share/logs/upstream-service1:rw
 
 #----------------------------------------------------------------------------------------------
 
   sleuth-sample-upstream-service2:
-        container_name: sleuth-sample-upstream-service2
-        ports:
-            - '9090:9090'
-        image: mdaros/sleuth-sample-upstream-service2
+     
+     container_name: sleuth-sample-upstream-service2
+     
+     image: mdaros/sleuth-sample-upstream-service2
 
+     ports:
+         - '9090:9090'
+
+     volumes:
+        - ./logs/upstream-service2:/usr/share/logs/upstream-service2:rw
+        
 #----------------------------------------------------------------------------------------------

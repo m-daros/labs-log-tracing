@@ -118,3 +118,42 @@ This scan log files with .log extension on every subfolder on $PROJECT_HOME/envi
 
 **upstream-service2** on port 9090
 
+
+
+### Install JMeter
+
+```
+cd jmeter
+
+chmod +x install-jmeter.sh
+
+./install-jmeter.sh
+```
+
+
+
+The script will download and unzip JMeter into the jmeter folder
+
+
+
+### Start JMeter
+
+```
+cd apache-jmeter-5.1.1/bin
+
+./jmeter
+```
+
+
+
+### Run the test plan
+
+To run the test plan
+
+Click on *File* -> *Open* then choose the file test-plan.jmx
+
+and start the test plan 
+
+
+
+JMeter will invoke the HTTP endpoint [http://localhost:10090/customers-info/${customerId}](http://localhost:10090/customers-info/${customerId}) using as parameter the customer identifiers defined on file *users.csv*

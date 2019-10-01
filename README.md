@@ -120,13 +120,9 @@ This scan log files with .log extension on every subfolder on $PROJECT_HOME/envi
 
 
 
-
-
 ### Configure Kibana
 
 Open Kibana at URL http://localhost:5601/app/kibana
-
-
 
 
 

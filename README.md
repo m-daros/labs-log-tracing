@@ -132,7 +132,9 @@ Go to *Management* -> *Index Patterns*
 
 
 
-
+```
+<br/><br/>
+```
 
 Click on button *Create index pattern*
 
@@ -142,7 +144,9 @@ Set @timestamp as timestamp field
 
 
 
-
+```
+<br/><br/>
+```
 
 Click on button *Create index pattern*
 
@@ -152,7 +156,9 @@ Set @timestamp as timestamp field
 
 
 
-
+```
+<br/><br/>
+```
 
 Click on button *Create index pattern
 
@@ -162,13 +168,17 @@ Set @timestamp as timestamp field
 
 
 
-
+```
+<br/><br/>
+```
 
 In order to populate indexes on Elasticsearch open the URL  [http://localhost:10090/customers-info/{customer-id}](http://localhost:10090/customers-info/{customer-id} ) on browser chosing customer id on the list  customer-0001, customer-0002, customer-0003, customer-0004, customer-0005
 
 
 
-
+```
+<br/><br/>
+```
 
 Distributed traces can be found on **APM Dashboard**
 

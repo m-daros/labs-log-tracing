@@ -70,13 +70,15 @@ APM data dan be visualized in **Kibana** using dedicated APM dashboards like the
 
 ![](docs/images/sample-app-tracing.png)
 
+<br/>
+
 ### Prerequisites
 
 - Java 8
 - Docker
 - Docker Compose
 
-
+<br/>
 
 ### How to start the lab
 
@@ -106,11 +108,11 @@ Filebeat is configured to scan log files on your laptop on folder $PROJECT_HOME/
 
 This scan log files with .log extension on every subfolder on $PROJECT_HOME/environments/logs
 
-
+<br/>
 
 **APM Server** on port 8200
 
-
+<br/>
 
 **downstream-service** on port 10090
 
@@ -118,7 +120,7 @@ This scan log files with .log extension on every subfolder on $PROJECT_HOME/envi
 
 **upstream-service2** on port 9090
 
-
+<br/>
 
 ### Configure Kibana
 

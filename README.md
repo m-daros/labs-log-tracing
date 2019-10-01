@@ -132,7 +132,7 @@ Go to *Management* -> *Index Patterns*
 
 
 
-
+<br/>
 
 Click on button *Create index pattern*
 
@@ -142,7 +142,7 @@ Set @timestamp as timestamp field
 
 
 
-<br/><br/>
+<br/>
 
 Click on button *Create index pattern*
 
@@ -152,7 +152,7 @@ Set @timestamp as timestamp field
 
 
 
-
+<br/>
 
 Click on button *Create index pattern
 
@@ -162,13 +162,13 @@ Set @timestamp as timestamp field
 
 
 
-
+<br/>
 
 In order to populate indexes on Elasticsearch open the URL  [http://localhost:10090/customers-info/{customer-id}](http://localhost:10090/customers-info/{customer-id} ) on browser chosing customer id on the list  customer-0001, customer-0002, customer-0003, customer-0004, customer-0005
 
 
 
-
+<br/>
 
 Distributed traces can be found on **APM Dashboard**
 
@@ -176,7 +176,7 @@ Centrilezed logs can be found on **Logs Dashboard**
 
 
 
-
+<br/>
 
 ### Install JMeter
 
@@ -196,7 +196,7 @@ The script will download and unzip JMeter into the *$PROJECT_HOME/jmeter* folder
 
 
 
-
+<br/>
 
 ### Start JMeter
 
@@ -208,7 +208,7 @@ cd apache-jmeter-5.1.1/bin
 
 
 
-
+<br/>
 
 ### Run the test plan
 
@@ -218,6 +218,6 @@ Click on *File* -> *Open* then choose the file test-plan.jmx
 
 and start the test plan 
 
-
+<br/>
 
 JMeter will invoke the HTTP endpoint [http://localhost:10090/customers-info/${customerId}](http://localhost:10090/customers-info/${customerId}) using as parameter the customer identifiers defined on file *users.csv*

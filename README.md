@@ -2,6 +2,8 @@
 
 The aims of this lab is to reason about complexity related to decomposition of  an application in small microservices having each one multiple instances, its own log files an every one interacting to one or more service in order to offer a broader functionality.
 
+<br/>
+
 We address two concerns:
 
 - **Logs aggregation**
@@ -10,13 +12,13 @@ We address two concerns:
 
   Obviously not: we need a single well known place where all logs are collected and accessible and we also need a way to search the info we need in a straightforward way.
 
-  
+  <br/>
 
 - **Distributed Tracing**
 
   If our application is affected by poor throughput, all computations takes long time to complete, or everyting is fine but sometime something happens and we can observe performance degradation, how can we found where is the problem if the degraded use case is spanned across many and many microservices? Is there one of them where we have a bottleneck? How can we found where a transaction is taking the majority of the computation time?
 
-
+<br/>
 
 Our sample application is composed by one downstream microservice that call other two upstream microservices
 
@@ -24,7 +26,7 @@ Our sample application is composed by one downstream microservice that call othe
 - **upstream-service1**
 - **upstream-service2**
 
-
+<br/>
 
 The downstream service exposes a REST endpoint [http://localhost:10090/customers-info/{customer-id}](http://localhost:10090/customers-info/{customer-id}) and retrieves info related to a Customer given the customer id
 
@@ -34,31 +36,37 @@ Customers [http://localhost:8080/customers/{customer-id}](http://localhost:8080/
 
 Customer addresses [http://localhost:9090/addresses/customer/{customer-id}](http://localhost:9090/addresses/customer/{customer-id})
 
-
+<br/>
 
 The info are composed and returned to the client
 
 The application is described in the following picture:
 
-
+<br/>
 
 ![](docs/images/labs-log-tracing.png)
 
 
 
+<br/>
+
 In our lab we can support both **logs aggregation** and **distributed tracing** using the **Elastic stack**
 
 http://elastic.co as described in the following image
+
+<br/>
 
 
 
 ![](docs/images/elastic-stack-with-apm.png)
 
+<br/>
+
 Related to logs aggregation perspective:
 
 Logs are collected by **Beats** (**FIlebeat** in our case) on every microservice machine or container, elaborated by **Logstash** (Extract Transform Load), ingested into **Elasticsearch** and then managed and visualized on **Kibana** in order to search the needed informations collected into logs.
 
-
+<br/>
 
 Related to distributed tracing:
 
@@ -66,7 +74,7 @@ The **Elastic APM stack** can get trace info on every microservice machine or co
 
 APM data dan be visualized in **Kibana** using dedicated APM dashboards like the following one that describe the trace of API calls exposed as REST endpoint [http://localhost:10090/customers-info/{customer-id}](http://localhost:10090/customers-info/{customer-id} )  and the interaction between the downstream service and the upstream (collaborators) services and related time consumptions.
 
-
+<br/>
 
 ![](docs/images/sample-app-tracing.png)
 
@@ -90,7 +98,7 @@ In order to start the lab, please open a shell window and type the following com
 
 `docker-compose up -d`
 
-
+<br/>
 
 Docker Compose will start a set of Docker containers for the following components
 
@@ -100,7 +108,7 @@ Docker Compose will start a set of Docker containers for the following component
 
 **Logstash** on ports 5400, 9600
 
-
+<br/>
 
 **Filebeat**
 
